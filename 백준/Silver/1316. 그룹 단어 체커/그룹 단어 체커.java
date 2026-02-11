@@ -1,32 +1,32 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int count = 0;
-        for (int i = 0 ; i < N ; i++) {
-            String group = scanner.next();
-            if (GroupWords(group)) {
-                count++;
-            }
-        }
-        System.out.println(count);
-    }
-    public static boolean GroupWords(String group) {
-        boolean[] words = new boolean[26];
-        char old = 'A';
-        for (int i = 0 ; i < group.length() ; i++) {
-            char nw = group.charAt(i);
-            int alp = nw - 'a';
-            if (old != nw) {
-                if (words[alp] == true) {
-                    return false;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int Num = 0;
+        for (int i = 0; i < N; i++) {
+            String s = br.readLine();
+            int[] arr = new int[27];
+            int word = 0;
+            for (int j = 0; j < s.length(); j++) {
+                int first = j == 0 ? 26 : s.charAt(j-1) - 'a';
+                int second = s.charAt(j) - 'a';
+                if (first != second) {
+                    arr[second]++;
                 }
             }
-            words[alp] = true;
-            old = nw;
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j] != 0 && arr[j] != 1) {
+                    word++;
+                }
+            }
+            if (word == 0) {
+                Num++;
+            }
         }
-        return true;
+        System.out.println(Num);
     }
 }
