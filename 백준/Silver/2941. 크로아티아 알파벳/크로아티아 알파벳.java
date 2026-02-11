@@ -1,15 +1,26 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String line = scanner.nextLine();
-        String[] cro = {"dz=", "c=", "c-", "d-", "lj", "nj", "s=", "z="};
-        for (String li : cro) {
-            if (line.contains(li)) {
-                line = line.replace(li, "?");
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input = br.readLine();
+        int n = input.length();
+        int Num = 0;
+        for (int i = 0; i < n; i++) {
+            if (input.contains("dz=")) {
+                input = input.replaceFirst("dz=", " ");
+                Num++;
+                i += 2;
+            } else if (input.contains("c=") || input.contains("c-") || input.contains("d-")
+            || input.contains("lj") || input.contains("nj") || input.contains("s=") || input.contains("z=")) {
+                input = input.replaceFirst("c=|c-|d-|lj|nj|s=|z=", " ");
+                Num++;
+                i++;
             }
         }
-        System.out.println(line.length());
+        input = input.replace(" ", "");
+        System.out.println(input.length() + Num);
     }
 }
