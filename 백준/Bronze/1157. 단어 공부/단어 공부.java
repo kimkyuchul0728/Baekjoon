@@ -1,31 +1,26 @@
-import java.util.Locale;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] alp = new int[26];
-        String li = scanner.nextLine();
-        String line = li.toUpperCase(Locale.ROOT);
-        for (int i = 0 ; i < li.length() ; i++) {
-            char a = line.charAt(i);
-            alp[a - 'A']++;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String st = br.readLine().toUpperCase();
+        int[] Alp = new int[26];
+        for (int i = 0; i < st.length(); i++) {
+            Alp[st.charAt(i) - 'A']++;
         }
-        int max = -1;
-        int maxAl = 0;
-        for (int i = 0 ; i < alp.length ; i++) {
-            if (alp[i] > max) {
-                max = alp[i];
-                maxAl = i;
+        int maxNum = 0;
+        String maxNumStr = "";
+        for (int i = 0; i < Alp.length; i++) {
+            if (Alp[i] > maxNum) {
+                maxNum = Alp[i];
+                maxNumStr = String.valueOf((char) (i + 65));
+            } else if (Alp[i] == maxNum) {
+                maxNumStr = "?";
             }
         }
-        for (int i = 0 ; i < alp.length ; i++) {
-            if (alp[i] == max && maxAl != i) {
-                System.out.println("?");
-                System.exit(0);
-            }
-        }
-        int lastMax = maxAl + 65;
-        System.out.println((char) lastMax);
+        System.out.println(maxNumStr);
     }
 }
