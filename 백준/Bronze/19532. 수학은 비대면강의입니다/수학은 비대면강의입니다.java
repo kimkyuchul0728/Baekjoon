@@ -1,21 +1,27 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-        int c = scanner.nextInt();
-        int d = scanner.nextInt();
-        int e = scanner.nextInt();
-        int f = scanner.nextInt();
-
-        int z = (b * d) - (e * a);
-        int x = (f * b) - (c * e);
-        int y = (c * d) - (f * a);
-
-        System.out.print(x / z + " ");
-        System.out.print(y / z);
-
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int x = 0;
+        int y = 0;
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int C = Integer.parseInt(st.nextToken());
+        int[] one = {A, B, C};
+        int D = Integer.parseInt(st.nextToken());
+        int E = Integer.parseInt(st.nextToken());
+        int F = Integer.parseInt(st.nextToken());
+        int[] two = {D, E, F};
+        int n = one[1] * two[0] - one[0] * two[1];
+        int dn = one[2] * two[0] - one[0] * two[2];
+        y = dn / n;
+        int dn2 = one[1] * two[2] - one[2] * two[1];
+        x = dn2 / n;
+        System.out.println(x + " " + y);
     }
 }
