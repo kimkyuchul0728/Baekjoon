@@ -1,27 +1,28 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int M = scanner.nextInt();
-        int[][] A = new int[N][M];
-        int[][] B = new int[N][M];
-        for (int i = 0 ; i < N ; i++) {
-            for (int j = 0 ; j < M ; j++) {
-                A[i][j] = scanner.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[][] result = new int[N][M];
+        for (int i = 0; i < N * 2; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < M; j++) {
+                if (i + 1 > N) {
+                    result[i - N][j] += Integer.parseInt(st.nextToken());
+                } else {
+                    result[i][j] = Integer.parseInt(st.nextToken());
+                }
             }
         }
-        for (int i = 0 ; i < N ; i++) {
-            for (int j = 0 ; j < M ; j++) {
-                B[i][j] = scanner.nextInt();
-            }
-        }
-        int[][] C = new int[N][M];
-        for (int i = 0 ; i < N ; i++) {
-            for (int j = 0 ; j < M ; j++) {
-                C[i][j] = A[i][j] + B[i][j];
-                System.out.print(C[i][j] + " ");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                System.out.print(result[i][j] + " ");
             }
             System.out.println();
         }
